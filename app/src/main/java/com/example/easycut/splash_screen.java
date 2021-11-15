@@ -22,5 +22,16 @@ public class splash_screen extends AppCompatActivity {
 
             }
         });
+        Button regi = (Button) findViewById(R.id.registration);
+        regi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(splash_screen.this , regiActivity.class );
+                startActivity(intent);
+
+            }
+        });
+
+
     }
 }
