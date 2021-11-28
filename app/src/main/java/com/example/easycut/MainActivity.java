@@ -4,22 +4,32 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.window.SplashScreen;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    Handler h= new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        h.postDelayed(new Runnable() {
+        Button sign = (Button) findViewById(R.id.sign_in);
+        sign.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this , splash_screen.class );
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Login.class);
                 startActivity(intent);
-                finish();
+
             }
-        }, 5000);
+        });
+        Button regi = (Button) findViewById(R.id.registration);
+        regi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+
+            }
+        });
     }
 }
