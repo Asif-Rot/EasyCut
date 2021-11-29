@@ -19,32 +19,32 @@ public class Appointment implements IAppointment{
 
     @Override
     public int getKey() {
-        return 0;
+        return _key;
     }
 
     @Override
-    public void setKey(String s) {
-
+    public void setKey(int i) {
+        _key = i;
     }
 
     @Override
     public int getType() {
-        return 0;
+        return _type;
     }
 
     @Override
     public void setType(int i) {
-
+        _type = i;
     }
 
     @Override
     public String getClientID() {
-        return null;
+        return _ClientID;
     }
 
     @Override
     public void getClientName(String s) {
-
+        _ClientID = s;
     }
 
     @Override
@@ -59,22 +59,22 @@ public class Appointment implements IAppointment{
 
     @Override
     public String getStartTime() {
-        return null;
+        return _startTime;
     }
 
     @Override
-    public void setStartTime(int i) {
-
+    public void setStartTime(String s) {
+        _startTime = s;
     }
 
     @Override
     public String getEndTime() {
-        return null;
+        return _endTime;
     }
 
     @Override
-    public void setEndTime(int i) {
-
+    public void setEndTime(String s) {
+        _endTime = s;
     }
 
     @Override

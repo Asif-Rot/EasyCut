@@ -3,7 +3,7 @@ package com.example.easycut;
 public interface IAppointment {
 
     public int getKey();
-    public void setKey(String s);
+    public void setKey(int i);
     public int getType();
     public void setType(int i);
     public String getClientID();
@@ -11,8 +11,8 @@ public interface IAppointment {
     public String getDate();
     public void setDate(String s);
     public String getStartTime();
-    public void setStartTime(int i);
+    public void setStartTime(String i);
     public String getEndTime();
-    public void setEndTime(int i);
+    public void setEndTime(String i);
     public int getDuration();
 }
