@@ -23,7 +23,7 @@ public class ScreenUser extends AppCompatActivity {
         _makeAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ScreenUser.this, AppointmentView.class);
+                Intent intent = new Intent(ScreenUser.this, AppointmentActivity.class);
                 startActivity(intent);
             }
         });

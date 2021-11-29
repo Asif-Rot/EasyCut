@@ -1,25 +1,17 @@
 package com.example.easycut;
 
-public class HairStylist implements hairStylistInterface {
-    final String _userTypeHairStylist = "HairStylist";
-    private IUser user;
+public class HairStylist extends User {
 
     public HairStylist(String _firstName, String _lastName, String _email, String _pass, String _phoneNumber, String _userID) {
-        user = new User(_firstName, _lastName, _email, _pass, _phoneNumber, _userID);
+        super(_firstName, _lastName, _email, _pass, _phoneNumber, _userID);
+        _userType = UserType.HairStylist;
     }
 
-    @Override
     public void updateCatlog() {
 
     }
 
-    @Override
     public void cancelAppoitment() {
 
-    }
-
-    @Override
-    public String getType() {
-        return _userTypeHairStylist;
     }
 }

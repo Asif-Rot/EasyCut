@@ -1,12 +1,13 @@
 package com.example.easycut;
 
 public class User implements IUser {
-    String _firstName;
-    String _lastName;
-    String _email;
-    String _pass;
-    String _phoneNumber;
-    String _userID;
+    protected String _firstName;
+    protected String _lastName;
+    protected String _email;
+    protected String _pass;
+    protected String _phoneNumber;
+    protected String _userID;
+    protected UserType _userType;
 
 
     public User(String _firstName, String _lastName,String _phoneNumber ,String _email , String _pass, String _userID) {
@@ -66,6 +67,11 @@ public class User implements IUser {
     @Override
     public void setUserID(String userID) {
         this._userID = userID;
+    }
+
+    @Override
+    public UserType getType() {
+        return _userType;
     }
 
     @Override

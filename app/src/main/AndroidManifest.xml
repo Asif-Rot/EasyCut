@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyCut">
         <activity
-            android:name=".AppointmentView"
+            android:name=".AppointmentActivity"
             android:exported="false" />
         <activity
             android:name=".ScreenUser"

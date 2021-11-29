@@ -15,5 +15,6 @@ public interface IUser {
     public void setEmail(String email);
     public String getUserID();
     public void setUserID(String userID);
+    public UserType getType();
 
 }

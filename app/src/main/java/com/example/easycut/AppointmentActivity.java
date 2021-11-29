@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class AppointmentView extends AppCompatActivity  implements AdapterView.OnItemSelectedListener{
+public class AppointmentActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener{
     Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
