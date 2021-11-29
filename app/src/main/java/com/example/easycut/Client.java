@@ -1,6 +1,6 @@
 package com.example.easycut;
 
-public class Client implements clientInterface, userInterface {
+public class Client implements clientInterface, IUser {
     final String _userTypeClient = "client";
     String _firstName;
     String _lastName;

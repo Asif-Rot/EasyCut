@@ -1,36 +1,69 @@
 package com.example.easycut;
 
-import androidx.appcompat.app.AppCompatActivity;
+public class Appointment implements IAppointment{
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
-
-public class Appointment extends AppCompatActivity  implements AdapterView.OnItemSelectedListener{
-    Spinner spinner;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_appointment);
-        spinner = (Spinner) findViewById(R.id.type_haircut);
-        ArrayAdapter<CharSequence> adapter= ArrayAdapter.
-                createFromResource(this,R.array.spinner ,R.layout.support_simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+    public int getKey() {
+        return 0;
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+    public void setKey(String s) {
+
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public int getType() {
+        return 0;
+    }
 
+    @Override
+    public void setType(int i) {
+
+    }
+
+    @Override
+    public String getClientID() {
+        return null;
+    }
+
+    @Override
+    public void getClientName(String s) {
+
+    }
+
+    @Override
+    public String getDate() {
+        return null;
+    }
+
+    @Override
+    public void setDate(String s) {
+
+    }
+
+    @Override
+    public String getStartTime() {
+        return null;
+    }
+
+    @Override
+    public void setStartTime(int i) {
+
+    }
+
+    @Override
+    public String getEndTime() {
+        return null;
+    }
+
+    @Override
+    public void setEndTime(int i) {
+
+    }
+
+    @Override
+    public int getDuration() {
+        return 0;
     }
 }

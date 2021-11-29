@@ -1,9 +1,10 @@
 package com.example.easycut;
 
-public interface userInterface {
+public interface IUser {
 
-    public String getFirstName();
+
     public String getLastName();
+    public String getFirstName();
     public void setFirsName(String firstName);
     public void setLastName(String lastName);
     public void setPassword(String pass);

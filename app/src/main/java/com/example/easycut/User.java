@@ -1,6 +1,6 @@
 package com.example.easycut;
 
-public class User implements userInterface {
+public class User implements IUser {
     String _firstName;
     String _lastName;
     String _email;
