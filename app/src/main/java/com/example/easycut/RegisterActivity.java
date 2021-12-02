@@ -78,9 +78,8 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         String id=mAuth.getCurrentUser().getUid();
                         database = FirebaseDatabase.getInstance();
-                        reference = database.getReference("Users");
+                       // reference = database.getReference("Users");
                         Client client=new Client(firstName,lastName,email,pass,phone,id);
-                        database = FirebaseDatabase.getInstance();
                         reference = database.getReference("Client");
                         reference.child(client.getUserID()).setValue(client);
                         Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
