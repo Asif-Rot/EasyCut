@@ -8,6 +8,7 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -21,6 +22,7 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
     String[] times = {"", "10:00","10:30","11:00" };
     DatePickerDialog picker;
     EditText eText;
+    Button showTimes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +60,27 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
         Spinner spinTimes = (Spinner) findViewById(R.id.timeSpinner);
         ArrayAdapter<String> adapterT = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,times);
         adapterT.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinTimes.setEnabled(false);      //to disable
+        spinTimes.setClickable(false);
         spinTimes.setAdapter(adapterT);
         spinTimes.setOnItemSelectedListener(this);
 
+        //button for show time
+        showTimes = (Button) findViewById(R.id.btnChooseTime);
+        showTimes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (eText.getText().toString().equals(""))
+                    Toast.makeText(getApplicationContext(),"Please pick a date first", Toast.LENGTH_SHORT).show();
+                else if (spinHairCut.getSelectedItem().toString().equals(""))
+                        Toast.makeText(getApplicationContext(),"Please pick an haircut first", Toast.LENGTH_SHORT).show();
+                    else{
+                    spinTimes.setEnabled(true);      //to enable
+                    spinTimes.setClickable(true);
+                }
+
+            }
+        });
     }
 
     @Override

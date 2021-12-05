@@ -65,20 +65,6 @@
         app:layout_constraintTop_toBottomOf="@+id/datePicker"
         app:layout_constraintVertical_bias="0.05" />
 
-    <TextView
-        android:id="@+id/textTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/select_time"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.118"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtHairCut"
-        app:layout_constraintVertical_bias="0.09" />
-
     <Button
         android:id="@+id/button"
         android:layout_width="158dp"
@@ -86,10 +72,10 @@
         android:text="@string/schedule"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.837" />
+        app:layout_constraintVertical_bias="0.834" />
 
     <Spinner
         android:id="@+id/timeSpinner"
@@ -100,10 +86,36 @@
         android:spinnerMode="dialog"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.219"
+        app:layout_constraintHorizontal_bias="0.208"
         app:layout_constraintStart_toEndOf="@+id/textTime"
         app:layout_constraintTop_toBottomOf="@+id/spinner1"
-        app:layout_constraintVertical_bias="0.059" />
+        app:layout_constraintVertical_bias="0.315" />
+
+    <TextView
+        android:id="@+id/textTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_time"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHairCut"
+        app:layout_constraintVertical_bias="0.337" />
+
+    <Button
+        android:id="@+id/btnChooseTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="see available times"
+        app:layout_constraintBottom_toTopOf="@+id/timeSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.657"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner1"
+        app:layout_constraintVertical_bias="0.441" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
