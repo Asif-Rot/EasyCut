@@ -1,14 +1,15 @@
 package com.example.easycut;
 
 public class Appointment implements IAppointment{
-    private int _key;
+    private String _key;
     private int _type;
     private String _ClientID;
     private String _startTime;
     private String _endTime;
 
 
-    public Appointment(int key,int type, String ClientID,String startTime, String endTime  ){
+
+    public Appointment(String key,int type, String ClientID,String startTime, String endTime  ){
         _key = key;
         _type = type;
         _ClientID = ClientID;
@@ -18,12 +19,12 @@ public class Appointment implements IAppointment{
     }
 
     @Override
-    public int getKey() {
+    public String getKey() {
         return _key;
     }
 
     @Override
-    public void setKey(int i) {
+    public void setKey(String i) {
         _key = i;
     }
 

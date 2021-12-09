@@ -13,11 +13,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Set;
 
 public class AppointmentActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener{
@@ -27,15 +29,19 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
     DatePickerDialog picker;
     EditText eText;
     Button showTimes;
-
+    private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private Appointment appointment = new Appointment(null,1, user.getUid(),null, null);
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
+        database = FirebaseDatabase.getInstance();
 
         //date picker
-        eText=(EditText) findViewById(R.id.datePicker);
+        eText = (EditText) findViewById(R.id.datePicker);
         eText.setInputType(InputType.TYPE_NULL);
         eText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +63,7 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
 
         //Spinner for haircuts
         Spinner spinHairCut = (Spinner) findViewById(R.id.spinner1);
-        ArrayAdapter<String> adapterHC = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,haircuts);
+        ArrayAdapter<String> adapterHC = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, haircuts);
         adapterHC.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinHairCut.setAdapter(adapterHC);
         spinHairCut.setOnItemSelectedListener(this);
@@ -71,7 +77,7 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
             @Override
             public void onClick(View v) {
                 if (eText.getText().toString().equals(""))
-                    Toast.makeText(getApplicationContext(),"Please pick a date first", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please pick a date first", Toast.LENGTH_SHORT).show();
                 else if (spinHairCut.getSelectedItem().toString().equals(""))
                         Toast.makeText(getApplicationContext(),"Please pick an haircut first", Toast.LENGTH_SHORT).show();
                     else{
@@ -82,7 +88,7 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
                         @Override
                         public void onCallback(Set<Integer> value) {
                             FireBaseService.getValidTimes(times);
-                            ArrayAdapter<String> adapterT = new ArrayAdapter<String>(AppointmentActivity.this, android.R.layout.simple_spinner_item,times);
+                            ArrayAdapter<String> adapterT = new ArrayAdapter<>(AppointmentActivity.this, android.R.layout.simple_spinner_item, times);
                             adapterT.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinTimes.setAdapter(adapterT);
                             spinTimes.setOnItemSelectedListener(AppointmentActivity.this);
@@ -90,6 +96,25 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
                                     "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"));
                         }
                     },eText.getText().toString());
+                }
+            }
+        });
+
+        Button scheduleButton = (Button) findViewById(R.id.button);
+        scheduleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!spinTimes.getSelectedItem().toString().equals("")) {
+                    appointment.setKey(eText.getText().toString());
+                    appointment.setStartTime(spinTimes.getSelectedItem().toString());
+                    reference = database.getReference("Appointment");
+                    reference.child(appointment.getKey()).child(getHour(appointment.getStartTime())).setValue(appointment);
+                    Toast.makeText(AppointmentActivity.this,
+                            "Appointment has been scheduled for: " + appointment.getKey()+ ", " + appointment.getStartTime(),
+                            Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Please pick time for your haircut", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -114,5 +139,54 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
 
     }
 
-
+    public String getHour(String hour) {
+        int hourStart;
+        switch (hour) {
+            case "9:00":  hourStart = 0;
+                break;
+            case "9:30":  hourStart = 1;
+                break;
+            case "10:00":  hourStart = 2;
+                break;
+            case "10:30":  hourStart = 3;
+                break;
+            case "11:00":  hourStart = 4;
+                break;
+            case "11:30":  hourStart = 5;
+                break;
+            case "12:00":  hourStart = 6;
+                break;
+            case "12:30":  hourStart = 7;
+                break;
+            case "13:00":  hourStart = 8;
+                break;
+            case "13:30":  hourStart = 9;
+                break;
+            case "14:00":  hourStart = 10;
+                break;
+            case "14:30":  hourStart = 11;
+                break;
+            case "15:00":  hourStart = 12;
+                break;
+            case "15:30":  hourStart = 13;
+                break;
+            case "16:00":  hourStart = 14;
+                break;
+            case "16:30":  hourStart = 15;
+                break;
+            case "17:00":  hourStart = 16;
+                break;
+            case "17:30":  hourStart = 17;
+                break;
+            case "18:00":  hourStart = 18;
+                break;
+            case "18:30":  hourStart = 19;
+                break;
+            case "19:00":  hourStart = 20;
+                break;
+            default: hourStart = -1;
+                break;
+        }
+        return ""+ hourStart;
+    }
 }

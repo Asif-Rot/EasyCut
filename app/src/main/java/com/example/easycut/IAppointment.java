@@ -2,8 +2,8 @@ package com.example.easycut;
 
 public interface IAppointment {
 
-    public int getKey();
-    public void setKey(int i);
+    public String getKey();
+    public void setKey(String i);
     public int getType();
     public void setType(int i);
     public String getClientID();
