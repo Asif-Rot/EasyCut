@@ -12,17 +12,23 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Set;
 
 public class AppointmentActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener{
     String[] haircuts = {"", "Men's haircut" };
-    String[] times = {"", "10:00","10:30","11:00" };
+    private ArrayList<String> times = new ArrayList<>(Arrays.asList("", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00",
+            "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"));
     DatePickerDialog picker;
     EditText eText;
     Button showTimes;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +48,7 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
                 picker = new DatePickerDialog(AppointmentActivity.this, new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                eText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                eText.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                             }
                         }, year, month, day);
                 picker.show();
@@ -58,12 +64,6 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
 
         //Spinner for times
         Spinner spinTimes = (Spinner) findViewById(R.id.timeSpinner);
-        ArrayAdapter<String> adapterT = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,times);
-        adapterT.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinTimes.setEnabled(false);      //to disable
-        spinTimes.setClickable(false);
-        spinTimes.setAdapter(adapterT);
-        spinTimes.setOnItemSelectedListener(this);
 
         //button for show time
         showTimes = (Button) findViewById(R.id.btnChooseTime);
@@ -75,10 +75,22 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
                 else if (spinHairCut.getSelectedItem().toString().equals(""))
                         Toast.makeText(getApplicationContext(),"Please pick an haircut first", Toast.LENGTH_SHORT).show();
                     else{
+
                     spinTimes.setEnabled(true);      //to enable
                     spinTimes.setClickable(true);
+                    FireBaseService.getHours(new UserListCallback() {
+                        @Override
+                        public void onCallback(Set<Integer> value) {
+                            FireBaseService.getValidTimes(times);
+                            ArrayAdapter<String> adapterT = new ArrayAdapter<String>(AppointmentActivity.this, android.R.layout.simple_spinner_item,times);
+                            adapterT.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinTimes.setAdapter(adapterT);
+                            spinTimes.setOnItemSelectedListener(AppointmentActivity.this);
+                            times = new ArrayList<>(Arrays.asList("", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00",
+                                    "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"));
+                        }
+                    },eText.getText().toString());
                 }
-
             }
         });
     }
@@ -91,7 +103,7 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
             Toast.makeText(getApplicationContext(), "Selected User: "+haircuts[position] ,Toast.LENGTH_SHORT).show();
         }
         if (spin2.getId() == R.id.timeSpinner){
-            Toast.makeText(getApplicationContext(), "Selected time: "+times[position] ,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Selected time: "+times.get(position) ,Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -101,4 +113,6 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
         //choose what to do when nothing selected.
 
     }
+
+
 }
