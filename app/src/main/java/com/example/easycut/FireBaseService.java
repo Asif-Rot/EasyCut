@@ -52,7 +52,7 @@ public class FireBaseService {
                 });
     }
 
-
+//remove all slots that unavailable
     public static void getValidTimes(ArrayList<String> times){
         for (String val : stringSet){
             times.remove(val);

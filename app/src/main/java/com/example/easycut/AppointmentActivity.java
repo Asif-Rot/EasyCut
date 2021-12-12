@@ -3,6 +3,7 @@ package com.example.easycut;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -17,12 +18,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Set;
 
-public class AppointmentActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener{
+public class AppointmentActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener {
     String[] haircuts = {"", "Men's haircut" };
     private ArrayList<String> times = new ArrayList<>(Arrays.asList("", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00",
             "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00"));
@@ -101,9 +104,8 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
             public void onClick(View v) {
                 if (!spinTimes.getSelectedItem().toString().equals("")) {
                     FireBaseService.db_makeAppointment(spinTimes, eText);
-                    Toast.makeText(AppointmentActivity.this,
-                            "Appointment has been scheduled for: " + FireBaseService.appointment.getKey()+ ", "
-                                    + FireBaseService.appointment.getStartTime(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(AppointmentActivity.this, BookingApproved.class);
+                    startActivity(intent);
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Please pick time for your haircut", Toast.LENGTH_SHORT).show();
@@ -113,21 +115,8 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Spinner spin = (Spinner)parent;
-        Spinner spin2 = (Spinner)parent;
-        if (spin.getId() == R.id.spinner1){
-            Toast.makeText(getApplicationContext(), "Selected User: "+haircuts[position] ,Toast.LENGTH_SHORT).show();
-        }
-        if (spin2.getId() == R.id.timeSpinner){
-            Toast.makeText(getApplicationContext(), "Selected time: "+times.get(position) ,Toast.LENGTH_SHORT).show();
-        }
-
-    }
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {}
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        //choose what to do when nothing selected.
-
-    }
+    public void onNothingSelected(AdapterView<?> parent) {}
 }

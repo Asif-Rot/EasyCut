@@ -15,5 +15,8 @@
     <string name="select_haircut">Select Haircut:</string>
     <string name="select_time">Select time:</string>
     <string name="schedule">schedule</string>
+    <string name="title_activity_booking_approve">bookingApprove</string>
+    <string name="your_appointment_has_been_approved">your appointment has been approved!</string>
+    <string name="booking_confirmed">Booking confirmed!</string>
 
 </resources>
