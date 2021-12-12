@@ -29,16 +29,11 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
     DatePickerDialog picker;
     EditText eText;
     Button showTimes;
-    private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    private Appointment appointment = new Appointment(null,1, user.getUid(),null, null);
-    private FirebaseDatabase database;
-    private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
-        database = FirebaseDatabase.getInstance();
 
         //date picker
         eText = (EditText) findViewById(R.id.datePicker);
@@ -105,13 +100,10 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
             @Override
             public void onClick(View v) {
                 if (!spinTimes.getSelectedItem().toString().equals("")) {
-                    appointment.setKey(eText.getText().toString());
-                    appointment.setStartTime(spinTimes.getSelectedItem().toString());
-                    reference = database.getReference("Appointment");
-                    reference.child(appointment.getKey()).child(getHour(appointment.getStartTime())).setValue(appointment);
+                    FireBaseService.db_makeAppointment(spinTimes, eText);
                     Toast.makeText(AppointmentActivity.this,
-                            "Appointment has been scheduled for: " + appointment.getKey()+ ", " + appointment.getStartTime(),
-                            Toast.LENGTH_SHORT).show();
+                            "Appointment has been scheduled for: " + FireBaseService.appointment.getKey()+ ", "
+                                    + FireBaseService.appointment.getStartTime(), Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Please pick time for your haircut", Toast.LENGTH_SHORT).show();
@@ -139,7 +131,7 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
 
     }
 
-    public String getHour(String hour) {
+    public static String getHour(String hour) {
         int hourStart;
         switch (hour) {
             case "9:00":  hourStart = 1;
