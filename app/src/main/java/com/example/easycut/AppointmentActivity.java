@@ -52,6 +52,7 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
                                 eText.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                             }
                         }, year, month, day);
+                picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 picker.show();
             }
         });
