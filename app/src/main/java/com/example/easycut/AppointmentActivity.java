@@ -76,12 +76,11 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
                 else if (spinHairCut.getSelectedItem().toString().equals(""))
                         Toast.makeText(getApplicationContext(),"Please pick an haircut first", Toast.LENGTH_SHORT).show();
                     else{
-
                     spinTimes.setEnabled(true);      //to enable
                     spinTimes.setClickable(true);
                     FireBaseService.getHours(new UserListCallback() {
                         @Override
-                        public void onCallback(Set<Integer> value) {
+                        public void onCallback(Set<String> value) {
                             FireBaseService.getValidTimes(times);
                             ArrayAdapter<String> adapterT = new ArrayAdapter<>(AppointmentActivity.this, android.R.layout.simple_spinner_item, times);
                             adapterT.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -129,56 +128,5 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
     public void onNothingSelected(AdapterView<?> parent) {
         //choose what to do when nothing selected.
 
-    }
-
-    public static String getHour(String hour) {
-        int hourStart;
-        switch (hour) {
-            case "9:00":  hourStart = 1;
-                break;
-            case "9:30":  hourStart = 2;
-                break;
-            case "10:00":  hourStart = 3;
-                break;
-            case "10:30":  hourStart = 4;
-                break;
-            case "11:00":  hourStart = 5;
-                break;
-            case "11:30":  hourStart = 6;
-                break;
-            case "12:00":  hourStart = 7;
-                break;
-            case "12:30":  hourStart = 8;
-                break;
-            case "13:00":  hourStart = 9;
-                break;
-            case "13:30":  hourStart = 10;
-                break;
-            case "14:00":  hourStart = 11;
-                break;
-            case "14:30":  hourStart = 12;
-                break;
-            case "15:00":  hourStart = 13;
-                break;
-            case "15:30":  hourStart = 14;
-                break;
-            case "16:00":  hourStart = 15;
-                break;
-            case "16:30":  hourStart = 16;
-                break;
-            case "17:00":  hourStart = 17;
-                break;
-            case "17:30":  hourStart = 18;
-                break;
-            case "18:00":  hourStart = 19;
-                break;
-            case "18:30":  hourStart = 20;
-                break;
-            case "19:00":  hourStart = 21;
-                break;
-            default: hourStart = -1;
-                break;
-        }
-        return ""+ hourStart;
     }
 }
