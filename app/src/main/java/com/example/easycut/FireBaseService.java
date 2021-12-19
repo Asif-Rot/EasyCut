@@ -60,6 +60,11 @@ public class FireBaseService {
         }
     }
 
+    /**
+     *  func service for get all turn for show to hairstyle
+     * @param myCallback -> help to pull data from data base
+     * @param date -> date for current day show turn
+     */
     public static void getClientDriy(final appointShowCallBack myCallback, String date){
         FirebaseDatabase.getInstance().getReference().child("Appointment").child(date).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -86,6 +91,12 @@ public class FireBaseService {
             }
         });
     }
+
+    /**
+     *  func to pull the current name of client from database
+     * @param myCallBack
+     * @param id
+     */
     public static  void getFullName(final callBackFullName myCallBack,String id){
         FirebaseDatabase.getInstance().getReference().child("Client").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
