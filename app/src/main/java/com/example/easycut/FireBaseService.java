@@ -23,6 +23,7 @@ import java.util.Set;
 
 public class FireBaseService {
     private static Set<String> stringSet = new HashSet<>();
+    private static HashMap<String, Appointment> map_appoint_show=new HashMap<>();
     private static final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     protected static Appointment appointment = new Appointment(null,1, user.getUid(),null, null);
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -59,11 +60,55 @@ public class FireBaseService {
         }
     }
 
+    public static void getClientDriy(final appointShowCallBack myCallback, String date){
+        FirebaseDatabase.getInstance().getReference().child("Appointment").child(date).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(!snapshot.exists())
+                        return;
+                    GenericTypeIndicator<HashMap<String, Object>> objectsGTypeInd = new GenericTypeIndicator<HashMap<String, Object>>() {};
+                    HashMap<String, Object> objectHashMap = snapshot.getValue(objectsGTypeInd);
+                    assert objectHashMap != null;
+                    for (DataSnapshot i:snapshot.getChildren()){
+                        String key=i.getKey();
+                        String startTime= i.child("startTime").getValue().toString();
+                        String clientID= i.child("clientID").getValue().toString();
+                        String duration= i.child("duration").getValue().toString();
+                        Appointment a=new Appointment(date,1,clientID,startTime,"0");
+                        map_appoint_show.put(key,a);
+                    }
+                    myCallback.appointShowCallBack(map_appoint_show);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public static  void getFullName(final callBackFullName myCallBack,String id){
+        FirebaseDatabase.getInstance().getReference().child("Client").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String first=snapshot.child("firstName").getValue().toString();
+                String last=snapshot.child("lastName").getValue().toString();
+                myCallBack.callBackFullName(first,last);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     public static void db_makeAppointment(Spinner spinTimes, EditText eText) {
         appointment.setKey(eText.getText().toString());
         appointment.setStartTime(spinTimes.getSelectedItem().toString());
         DatabaseReference reference = database.getReference("Appointment");
         reference.child(appointment.getKey()).child(getHour(appointment.getStartTime())).setValue(appointment);
+        //ֿreference.child(appointment.getKey()).child(appointment.getStartTime()).setValue(appointment);
+        reference.child(appointment.getKey()).orderByKey();
+        System.out.println();
     }
 
     public static String getHour(String hour) {

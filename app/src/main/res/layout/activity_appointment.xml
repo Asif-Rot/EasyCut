@@ -4,67 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/splashbackground"
     tools:context=".AppointmentActivity"
-    android:background="@drawable/splashbackground">
+    tools:visibility="visible">
 
 
     <TextView
         android:id="@+id/textDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="106dp"
+        android:layout_height="48dp"
+        android:gravity="center"
         android:text="@string/select_date"
-        android:textSize="17sp"
+        android:textSize="19sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtHairCut"
         app:layout_constraintEnd_toStartOf="@+id/datePicker"
-        app:layout_constraintHorizontal_bias="0.73"
+        app:layout_constraintHorizontal_bias="0.324"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.576" />
+        app:layout_constraintVertical_bias="0.717" />
 
     <EditText
         android:id="@+id/datePicker"
         android:layout_width="213dp"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
         android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:hint="@string/enter_date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.722"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.104" />
+        app:layout_constraintVertical_bias="0.104"
+        tools:visibility="visible" />
+
 
     <TextView
         android:id="@+id/txtHairCut"
         android:layout_width="123dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:gravity="center"
         android:text="@string/select_haircut"
-        android:textSize="17sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.227"
+        app:layout_constraintVertical_bias="0.215"
         tools:ignore="MissingConstraints" />
 
-
     <Spinner
-        android:id="@+id/spinner1"
+        android:id="@+id/spinnerHairType"
         style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="215dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
+
         android:prompt="@string/select_haircut"
-        android:spinnerMode="dialog"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/txtHairCut"
         app:layout_constraintTop_toBottomOf="@+id/datePicker"
-        app:layout_constraintVertical_bias="0.05" />
-
+        app:layout_constraintVertical_bias="0.05"
+        tools:ignore="SpeakableTextPresentCheck" />
+<!--    android:entries="@array/spinner_type_hair_items"-->
     <Button
         android:id="@+id/button"
         android:layout_width="158dp"
@@ -78,44 +86,50 @@
         app:layout_constraintVertical_bias="0.834" />
 
     <Spinner
-        android:id="@+id/timeSpinner"
+        android:id="@+id/spinnerTime"
         style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="216dp"
-        android:layout_height="41dp"
+        android:layout_height="48dp"
         android:prompt="@string/select_time"
-        android:spinnerMode="dialog"
+        android:spinnerMode="dropdown"
         android:clickable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.208"
         app:layout_constraintStart_toEndOf="@+id/textTime"
-        app:layout_constraintTop_toBottomOf="@+id/spinner1"
-        app:layout_constraintVertical_bias="0.315" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerHairType"
+        app:layout_constraintVertical_bias="0.315"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <!--        android:clickable="false"-->
+    <!--        android:focusableInTouchMode="false"-->
 
     <TextView
         android:id="@+id/textTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="109dp"
+        android:layout_height="48dp"
+        android:gravity="center"
         android:text="@string/select_time"
-        android:textSize="17sp"
+        android:textColor="#616161"
+        android:textSize="19sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHairCut"
-        app:layout_constraintVertical_bias="0.337" />
+        app:layout_constraintVertical_bias="0.315" />
 
     <Button
         android:id="@+id/btnChooseTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="see available times"
-        app:layout_constraintBottom_toTopOf="@+id/timeSpinner"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerTime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.657"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner1"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerHairType"
         app:layout_constraintVertical_bias="0.441" />
 
 

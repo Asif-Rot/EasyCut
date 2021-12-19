@@ -1,11 +1,17 @@
 package com.example.easycut;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.InputType;
+import android.text.TextUtils;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -61,15 +67,14 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
         });
 
         //Spinner for haircuts
-        Spinner spinHairCut = (Spinner) findViewById(R.id.spinner1);
+        Spinner spinHairCut = (Spinner) findViewById(R.id.spinnerHairType);
         ArrayAdapter<String> adapterHC = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, haircuts);
         adapterHC.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinHairCut.setAdapter(adapterHC);
         spinHairCut.setOnItemSelectedListener(this);
 
         //Spinner for times
-        Spinner spinTimes = (Spinner) findViewById(R.id.timeSpinner);
-
+        Spinner spinTimes = (Spinner) findViewById(R.id.spinnerTime);
         //button for show time
         showTimes = (Button) findViewById(R.id.btnChooseTime);
         showTimes.setOnClickListener(new View.OnClickListener() {

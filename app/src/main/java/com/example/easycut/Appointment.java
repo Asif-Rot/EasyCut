@@ -1,5 +1,7 @@
 package com.example.easycut;
 
+import java.util.HashMap;
+
 public class Appointment implements IAppointment{
     private String _key;
     private int _type;
@@ -17,6 +19,7 @@ public class Appointment implements IAppointment{
         _endTime = endTime;
 
     }
+
 
     @Override
     public String getKey() {
