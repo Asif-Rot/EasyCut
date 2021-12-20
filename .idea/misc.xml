@@ -15,15 +15,17 @@
         <entry key="..\:/Users/Hay Asa/AndroidStudioProjects/EasyCut/app/src/main/res/layout/activity_regi.xml" value="0.19429347826086957" />
         <entry key="..\:/Users/Hay Asa/AndroidStudioProjects/EasyCut/app/src/main/res/layout/activity_screen_user.xml" value="0.1816123188405797" />
         <entry key="..\:/Users/Hay Asa/AndroidStudioProjects/EasyCut/app/src/main/res/layout/activity_splash_screen.xml" value="0.19429347826086957" />
+        <entry key="app/src/main/res/layout/activity_add_del_haircut.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_appointment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_booking_approved.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_diary_hs.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.31412329288215574" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.12537993920972645" />
         <entry key="app/src/main/res/layout/activity_regi.xml" value="0.13949275362318841" />
-        <entry key="app/src/main/res/layout/activity_screen_hs.xml" value="0.14673913043478262" />
-        <entry key="app/src/main/res/layout/activity_screen_user.xml" value="0.14673913043478262" />
+        <entry key="app/src/main/res/layout/activity_screen_hs.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_screen_user.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/dialog_show_prod.xml" value="0.4036458333333333" />
       </map>
     </option>
   </component>

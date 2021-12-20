@@ -38,5 +38,15 @@ public class Screen_HS extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button add_haircut=(Button) findViewById(R.id.add_haircut);
+        add_haircut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Screen_HS.this, AddDelHaircut.class);
+                startActivity(intent);
+
+            }
+        });
     }
 }

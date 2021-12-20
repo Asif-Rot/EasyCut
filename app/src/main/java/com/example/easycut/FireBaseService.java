@@ -1,13 +1,15 @@
 package com.example.easycut;
-
+import com.example.easycut.callInterface.*;
 
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,6 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -171,5 +175,24 @@ public class FireBaseService {
                 break;
         }
         return ""+ hourStart;
+    }
+
+    public static void get_set_Product(final callBackProudct callProudct){
+        List<String> list=new LinkedList<>();
+        FirebaseDatabase.getInstance().getReference().child("Product").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot i : snapshot.getChildren()){
+                    String product = i.getValue().toString();
+                    list.add(product);
+                }
+                callProudct.callBackProudct(list);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
