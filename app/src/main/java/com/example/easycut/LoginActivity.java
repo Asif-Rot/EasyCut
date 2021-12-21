@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
     EditText _email;
@@ -57,12 +57,12 @@ public class Login extends AppCompatActivity {
             System.out.println(s);
             // check if current user is the hairstyle for next screen
             if(!s.equals("hsp5DBs6EZQ3JbDrWk0WiMXTzSM2")){
-                Intent intent = new Intent(Login.this, ScreenUser.class);
+                Intent intent = new Intent(LoginActivity.this, ScreenUserActivity.class);
                 startActivity(intent);
             }
             else{
                 currentUser.reload();
-                Intent intent = new Intent(Login.this, Screen_HS.class);
+                Intent intent = new Intent(LoginActivity.this, ScreenHairStylistActivity.class);
                 startActivity(intent);
             }
         }
@@ -83,18 +83,18 @@ public class Login extends AppCompatActivity {
                             System.out.println(s);
                             // check if current user is the hairstyle for next screen
                             if(!s.equals("hsp5DBs6EZQ3JbDrWk0WiMXTzSM2")){
-                                Intent intent = new Intent(Login.this, ScreenUser.class);
+                                Intent intent = new Intent(LoginActivity.this, ScreenUserActivity.class);
                                 startActivity(intent);
                             }
                             else{
-                                Intent intent = new Intent(Login.this, Screen_HS.class);
+                                Intent intent = new Intent(LoginActivity.this, ScreenHairStylistActivity.class);
                                 startActivity(intent);
                             }
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(Login.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
 //                            updateUI(null);
                         }

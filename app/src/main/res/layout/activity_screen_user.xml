@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScreenUser"
+    tools:context=".ScreenUserActivity"
     android:background="@drawable/splashbackground"
     >
 
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.254" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnViewApp"
         android:layout_width="223dp"
         android:layout_height="86dp"
         android:text="View Appointment"

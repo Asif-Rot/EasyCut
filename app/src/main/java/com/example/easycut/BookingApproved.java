@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.Serializable;
-
 public class BookingApproved extends AppCompatActivity  {
     TextView details;
     Button homeBtn;
@@ -29,7 +27,7 @@ public class BookingApproved extends AppCompatActivity  {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BookingApproved.this, ScreenUser.class);
+                Intent intent = new Intent(BookingApproved.this, ScreenUserActivity.class);
                 startActivity(intent);
             }
         });

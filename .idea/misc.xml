@@ -4,7 +4,6 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.14791666666666667" />
-        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_spinner_dropdown_item.xml" value="0.12552083333333333" />
         <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.115625" />
         <entry key="..\:/Users/97250/AndroidStudioProjects/EasyCut/app/src/main/res/layout/activity_appointment.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/97250/AndroidStudioProjects/EasyCut/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
@@ -13,9 +12,12 @@
         <entry key="..\:/Users/Hay Asa/AndroidStudioProjects/EasyCut/app/src/main/res/layout/activity_appointment.xml" value="0.25" />
         <entry key="..\:/Users/Hay Asa/AndroidStudioProjects/EasyCut/app/src/main/res/layout/activity_login.xml" value="0.19429347826086957" />
         <entry key="..\:/Users/Hay Asa/AndroidStudioProjects/EasyCut/app/src/main/res/layout/activity_main.xml" value="0.19429347826086957" />
+        <entry key="..\:/Users/Hay Asa/AndroidStudioProjects/EasyCut/app/src/main/res/layout/activity_my_appointment.xml" value="0.1" />
         <entry key="..\:/Users/Hay Asa/AndroidStudioProjects/EasyCut/app/src/main/res/layout/activity_regi.xml" value="0.19429347826086957" />
+        <entry key="..\:/Users/Hay Asa/AndroidStudioProjects/EasyCut/app/src/main/res/layout/activity_screen_hs.xml" value="0.18" />
         <entry key="..\:/Users/Hay Asa/AndroidStudioProjects/EasyCut/app/src/main/res/layout/activity_screen_user.xml" value="0.1816123188405797" />
         <entry key="..\:/Users/Hay Asa/AndroidStudioProjects/EasyCut/app/src/main/res/layout/activity_splash_screen.xml" value="0.19429347826086957" />
+        <entry key="..\:/Users/Hay Asa/AndroidStudioProjects/EasyCut/app/src/main/res/layout/dialog_show_prod.xml" value="0.10104166666666667" />
         <entry key="app/src/main/res/layout/activity_add_del_haircut.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_appointment.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_booking_approved.xml" value="0.25" />

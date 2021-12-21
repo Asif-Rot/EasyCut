@@ -9,9 +9,10 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ScreenUser extends AppCompatActivity {
+public class ScreenUserActivity extends AppCompatActivity {
     Button logOut;
     Button _makeAppointment;
+    Button viewAppointment;
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,16 @@ public class ScreenUser extends AppCompatActivity {
         _makeAppointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ScreenUser.this, AppointmentActivity.class);
+                Intent intent = new Intent(ScreenUserActivity.this, AppointmentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        viewAppointment = findViewById(R.id.btnViewApp);
+        viewAppointment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ScreenUserActivity.this, myAppointmentActivity.class);
                 startActivity(intent);
             }
         });
@@ -31,7 +41,7 @@ public class ScreenUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(ScreenUser.this, MainActivity.class);
+                Intent intent = new Intent(ScreenUserActivity.this, MainActivity.class);
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//makesure user cant go back
                 startActivity(intent);

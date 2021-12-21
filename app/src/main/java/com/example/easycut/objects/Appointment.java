@@ -1,8 +1,10 @@
-package com.example.easycut;
+package com.example.easycut.objects;
+
+import com.example.easycut.IAppointment;
 
 import java.util.HashMap;
 
-public class Appointment implements IAppointment{
+public class Appointment implements IAppointment {
     private String _key;
     private int _type;
     private String _ClientID;
@@ -53,7 +55,7 @@ public class Appointment implements IAppointment{
 
     @Override
     public String getDate() {
-        return null;
+        return _key;
     }
 
     @Override

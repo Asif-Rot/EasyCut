@@ -1,5 +1,7 @@
 package com.example.easycut;
 
+import com.example.easycut.Enum.UserType;
+
 public interface IUser {
 
 

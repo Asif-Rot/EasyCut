@@ -7,24 +7,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.easycut.callInterface.appointShowCallBack;
+import com.example.easycut.callInterface.callBackFullName;
+import com.example.easycut.objects.Appointment;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Set;
 
 /**
  * activity of diary for hairstyle
  */
-public class Diary_HS extends AppCompatActivity {
+public class DiaryHairStylistActivity extends AppCompatActivity {
     DatePickerDialog picker;
     HashMap<String, TextView> map_txt;
     final int VISIBLE = 0x00000000;
@@ -46,7 +47,7 @@ public class Diary_HS extends AppCompatActivity {
                 int month = cldr.get(Calendar.MONTH);
                 int year = cldr.get(Calendar.YEAR);
                 // date picker dialog
-                picker = new DatePickerDialog(Diary_HS.this, new DatePickerDialog.OnDateSetListener() {
+                picker = new DatePickerDialog(DiaryHairStylistActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         datapikerHS.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
@@ -64,7 +65,7 @@ public class Diary_HS extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Diary_HS.this, Screen_HS.class);
+                Intent intent = new Intent(DiaryHairStylistActivity.this, ScreenHairStylistActivity.class);
                 startActivity(intent);
             }
         });

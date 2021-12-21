@@ -1,4 +1,4 @@
-package com.example.easycut;
+package com.example.easycut.callInterface;
 
 /**
  * interface for pull the current name of client

@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 /**
  * activity  screen to hair style
  */
-public class Screen_HS extends AppCompatActivity {
+public class ScreenHairStylistActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class Screen_HS extends AppCompatActivity {
         showDayBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Screen_HS.this,Diary_HS.class));
+                startActivity(new Intent(ScreenHairStylistActivity.this, DiaryHairStylistActivity.class));
             }
         });
 
@@ -32,7 +32,7 @@ public class Screen_HS extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(Screen_HS.this, MainActivity.class);
+                Intent intent = new Intent(ScreenHairStylistActivity.this, MainActivity.class);
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//makesure user cant go back
                 startActivity(intent);
@@ -43,7 +43,7 @@ public class Screen_HS extends AppCompatActivity {
         add_haircut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Screen_HS.this, AddDelHaircut.class);
+                Intent intent = new Intent(ScreenHairStylistActivity.this, AddDelHaircutActivity.class);
                 startActivity(intent);
 
             }

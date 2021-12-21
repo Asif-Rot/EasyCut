@@ -2,18 +2,15 @@ package com.example.easycut;
 
 import static android.content.ContentValues.TAG;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AddDelHaircut extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class AddDelHaircutActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     List<String> product_list = new LinkedList<>();
 
     @Override
@@ -44,7 +41,7 @@ public class AddDelHaircut extends AppCompatActivity implements AdapterView.OnIt
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddDelHaircut.this, Screen_HS.class);
+                Intent intent = new Intent(AddDelHaircutActivity.this, ScreenHairStylistActivity.class);
                 startActivity(intent);
             }
         });
@@ -64,7 +61,7 @@ public class AddDelHaircut extends AppCompatActivity implements AdapterView.OnIt
                         /**
                          * dialog for show kind of hair cut to hairstyle
                          */
-                        AlertDialog.Builder mBulider = new AlertDialog.Builder(AddDelHaircut.this);
+                        AlertDialog.Builder mBulider = new AlertDialog.Builder(AddDelHaircutActivity.this);
                         View mView = getLayoutInflater().inflate(R.layout.dialog_show_prod, null);
                         TextView show = (TextView) mView.findViewById(R.id.showProd);
                         Button back=(Button) mView.findViewById(R.id.back);
@@ -116,10 +113,10 @@ public class AddDelHaircut extends AppCompatActivity implements AdapterView.OnIt
                 FireBaseService.get_set_Product(new callBackProudct() {
                     @Override
                     public void callBackProudct(List<String> list) {
-                        ArrayAdapter<String> adapterT = new ArrayAdapter<>(AddDelHaircut.this, android.R.layout.simple_spinner_item, list);
+                        ArrayAdapter<String> adapterT = new ArrayAdapter<>(AddDelHaircutActivity.this, android.R.layout.simple_spinner_item, list);
                         adapterT.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinner_remove.setAdapter(adapterT);
-                        spinner_remove.setOnItemSelectedListener(AddDelHaircut.this);
+                        spinner_remove.setOnItemSelectedListener(AddDelHaircutActivity.this);
                         ok_remove.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

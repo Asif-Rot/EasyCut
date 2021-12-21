@@ -13,28 +13,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyCut">
         <activity
-            android:name=".AddDelHaircut"
+            android:name=".AddDelHaircutActivity"
             android:exported="false" />
         <activity
-            android:name=".Diary_HS"
+            android:name=".DiaryHairStylistActivity"
             android:exported="false" />
         <activity
-            android:name=".Screen_HS"
+            android:name=".ScreenHairStylistActivity"
             android:exported="false" />
         <activity
             android:name=".BookingApproved"
             android:exported="false" />
         <activity
+            android:name=".myAppointmentActivity"
+            android:exported="false" />
+        <activity
             android:name=".AppointmentActivity"
             android:exported="false" />
         <activity
-            android:name=".ScreenUser"
+            android:name=".ScreenUserActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

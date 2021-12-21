@@ -1,4 +1,6 @@
-package com.example.easycut;
+package com.example.easycut.objects;
+
+import com.example.easycut.Enum.UserType;
 
 public class Client extends User {
 

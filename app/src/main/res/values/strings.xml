@@ -18,5 +18,7 @@
     <string name="title_activity_booking_approve">bookingApprove</string>
     <string name="your_appointment_has_been_approved">your appointment has been approved!</string>
     <string name="booking_confirmed">Booking confirmed!</string>
+    <string name="my_appointment">My Appointment</string>
+    <string name="home">home</string>
 
 </resources>

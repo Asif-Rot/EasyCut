@@ -1,15 +1,16 @@
 package com.example.easycut;
 import com.example.easycut.callInterface.*;
 
+import android.os.Build;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
+import com.example.easycut.objects.Appointment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,7 +18,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -195,4 +200,69 @@ public class FireBaseService {
             }
         });
     }
+
+    /**
+     * func to get all user appointments
+     * @param myCallback
+     * @return arraylist with all user appointments
+     */
+    public static ArrayList<Appointment> getMyAppointments(final myAppointmentCallback myCallback){
+        ArrayList<Appointment> appointmentList = new ArrayList<>();
+        database.getReference().child("Appointment").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot date : snapshot.getChildren()) {
+                    for (DataSnapshot appTemp : date.getChildren()) {
+                        if (appTemp.child("clientID").getValue().equals(user.getUid())) {
+                            int type = Integer.parseInt(appTemp.child("type").getValue().toString());
+                            String start = appTemp.child("startTime").getValue().toString();
+                            String end = "";
+
+                            Appointment appointment = new Appointment(date.getKey(), type, user.getUid(), start, end);
+                            appointmentList.add(appointment);
+                        }
+                    }
+                }
+                myCallback.onCallback(appointmentList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        return appointmentList;
+    }
+
+    /**
+     * func to remove all appointment history. running every time someone sign in to the App.
+     * @throws ParseException
+     */
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static void cleanHistory() throws ParseException {
+        SimpleDateFormat dtf = new SimpleDateFormat("dd-MM-yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        Date today = new Date();
+        database.getReference().child("Appointment").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot x : snapshot.getChildren()){
+                    try {
+                        Date temp = dtf.parse(x.getKey());
+                        if (today.compareTo(temp) > 0 && !dtf.format(today).equals(dtf.format(temp))){
+                            x.getRef().removeValue();
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }
+
+

@@ -1,4 +1,7 @@
-package com.example.easycut;
+package com.example.easycut.objects;
+
+import com.example.easycut.Enum.UserType;
+import com.example.easycut.IUser;
 
 public class User implements IUser {
     protected String _firstName;
