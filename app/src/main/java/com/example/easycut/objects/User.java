@@ -1,7 +1,6 @@
 package com.example.easycut.objects;
-
+import com.example.easycut.Interface.*;
 import com.example.easycut.Enum.UserType;
-import com.example.easycut.IUser;
 
 public class User implements IUser {
     protected String _firstName;
@@ -11,7 +10,6 @@ public class User implements IUser {
     protected String _phoneNumber;
     protected String _userID;
     protected UserType _userType;
-
 
     public User(String _firstName, String _lastName,String _phoneNumber ,String _email , String _pass, String _userID) {
         this._firstName = _firstName;
@@ -86,4 +84,6 @@ public class User implements IUser {
     public void setPassword(String pass) {
         this._pass=pass;
     }
+
+
 }

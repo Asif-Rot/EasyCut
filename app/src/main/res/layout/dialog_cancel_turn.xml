@@ -3,42 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Screen_HS"
-    android:background="@drawable/splashbackground">
-
+    android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/show_dayBook"
-        android:layout_width="223dp"
-        android:layout_height="72dp"
-        android:text="Diary"
+        android:id="@+id/yes"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:text="yes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.171" />
+        app:layout_constraintVertical_bias="0.891" />
 
     <Button
-        android:id="@+id/logout_HS"
-        android:layout_width="223dp"
-        android:layout_height="72dp"
-        android:text="Logout"
+        android:id="@+id/no"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:text="no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.835"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.851" />
+        app:layout_constraintVertical_bias="0.893" />
 
-    <Button
-        android:id="@+id/add_haircut"
-        android:layout_width="223dp"
-        android:layout_height="72dp"
-        android:text="add hair cut"
+    <TextView
+        android:id="@+id/if_cancel"
+        android:layout_width="235dp"
+        android:layout_height="309dp"
+        android:gravity="center_horizontal"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.335" />
-
+        app:layout_constraintVertical_bias="0.352" />
 </androidx.constraintlayout.widget.ConstraintLayout>

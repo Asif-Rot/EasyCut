@@ -4,7 +4,7 @@ import com.example.easycut.Enum.UserType;
 
 public class HairStylist extends User {
 
-    public HairStylist(String _firstName, String _lastName, String _email, String _pass, String _phoneNumber, String _userID) {
+    public HairStylist(String _firstName, String _lastName, String _email, String _pass, String _phoneNumber, String _userID,int msg) {
         super(_firstName, _lastName, _email, _pass, _phoneNumber, _userID);
         _userType = UserType.HairStylist;
     }

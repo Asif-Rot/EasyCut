@@ -18,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try {
+            FireBaseService.cleanHistory();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         Button sign = (Button) findViewById(R.id.sign_in);
         sign.setOnClickListener(new View.OnClickListener() {
             @Override

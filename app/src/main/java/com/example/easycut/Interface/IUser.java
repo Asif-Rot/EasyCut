@@ -1,4 +1,4 @@
-package com.example.easycut;
+package com.example.easycut.Interface;
 
 import com.example.easycut.Enum.UserType;
 
@@ -18,5 +18,6 @@ public interface IUser {
     public String getUserID();
     public void setUserID(String userID);
     public UserType getType();
+
 
 }
