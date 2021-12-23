@@ -1,9 +1,17 @@
 package com.example.easycut;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -29,11 +37,16 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
     DatePickerDialog picker;
     EditText eText;
     Button showTimes;
+    Button scheduleButton;
+    private NotificationManagerCompat notificationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment);
+
+        // Notification manager
+        notificationManager = NotificationManagerCompat.from(this);
 
         //date picker
         eText = (EditText) findViewById(R.id.datePicker);
@@ -94,12 +107,13 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
             }
         });
 
-        Button scheduleButton = (Button) findViewById(R.id.button);
+        scheduleButton = (Button) findViewById(R.id.button);
         scheduleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!spinTimes.getSelectedItem().toString().equals("")) {
                     FireBaseService.db_makeAppointment(spinTimes, eText);
+                    sendOnChannel(v);
                     Intent intent = new Intent(AppointmentActivity.this, BookingApproved.class);
                     startActivity(intent);
                 }
@@ -108,6 +122,27 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
                 }
             }
         });
+    }
+
+    public void sendOnChannel (View v) {
+        String message = "Your appointment has been scheduled";
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(this, NotificationService.CHANNEL)
+                .setSmallIcon(R.drawable.ic_cut)
+                .setContentTitle(message)
+                .setContentText(FireBaseService.appointment.getKey()+ ", "
+                        + FireBaseService.appointment.getStartTime())
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setAutoCancel(true);
+
+        Intent intent_notification = new Intent(AppointmentActivity.this, myAppointmentActivity.class);
+        intent_notification.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent_notification.putExtra("message",message);
+        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent pendingIntent=PendingIntent
+                .getActivity(AppointmentActivity.this,0,intent_notification,PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.setContentIntent(pendingIntent);
+
+        notificationManager.notify(1, notification.build());
     }
 
     @Override
