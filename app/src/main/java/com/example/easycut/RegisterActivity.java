@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -44,12 +45,38 @@ public class RegisterActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                creatClient();
+                onStart();
+                createClient();
             }
         });
     }
 
-    public void creatClient() {
+    /**
+     *  Check if user is already signed in (non-null), if so continue to ScreenUser.
+     */
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Toast.makeText(getApplicationContext(), "You are already signed in!" ,Toast.LENGTH_SHORT).show();
+            currentUser.reload();
+            String s=currentUser.getUid();
+            System.out.println(s);
+            // check if current user is the hairstyle for next screen
+            if(!s.equals("hsp5DBs6EZQ3JbDrWk0WiMXTzSM2")){
+                Intent intent = new Intent(RegisterActivity.this, ScreenUserActivity.class);
+                startActivity(intent);
+            }
+            else{
+                currentUser.reload();
+                Intent intent = new Intent(RegisterActivity.this, ScreenHairStylistActivity.class);
+                startActivity(intent);
+            }
+        }
+    }
+
+    public void createClient() {
         String firstName = _firstName.getText().toString();
         String lastName = _lastName.getText().toString();
         String phone = _phone.getText().toString();
