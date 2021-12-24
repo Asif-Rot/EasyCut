@@ -49,10 +49,7 @@ public class DiaryHairStylistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_hs);
 
-        //back button
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         init_map();
         datapikerHS = (EditText) findViewById(R.id.datePickerHS);
@@ -133,7 +130,7 @@ public class DiaryHairStylistActivity extends AppCompatActivity {
                                      */
                                     @Override
                                     public void callBackFullName(String first, String last, String phone) {
-                                        map_txt.get(time).setText(" * Time :   ֿ" + p.getStartTime() + "            Type hair cut :   " + "  \n" + "    First name :   " +
+                                        map_txt.get(time).setText(" * Time :   ֿ" + p.getStartTime() + "            Type hair cut :   "+p.getType()+ "  \n" + "    First name :   " +
                                                 first + " \n " + "   Last name :   " + last + "         Phone :   " + phone + "\n_____________________________________________________________________");
                                         map_txt.get(time).setVisibility(VISIBLE);
                                     }
