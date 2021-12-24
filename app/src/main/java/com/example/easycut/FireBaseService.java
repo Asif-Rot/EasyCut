@@ -83,7 +83,7 @@ public class FireBaseService {
      * @param myCallback -> help to pull data from data base
      * @param date       -> date for current day show turn
      */
-    public static void getClientDriy( final appointShowCallBack myCallback, String date) {
+    public static void getClientDriy(Context context, final appointShowCallBack myCallback, String date) {
         map_appoint_show.clear();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Appointment").child(date);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
