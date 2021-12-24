@@ -239,8 +239,8 @@ public class FireBaseService {
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void cleanHistory() throws ParseException {
+        System.out.println();
         SimpleDateFormat dtf = new SimpleDateFormat("dd-MM-yyyy");
-        LocalDateTime now = LocalDateTime.now();
         Date today = new Date();
         database.getReference().child("Appointment").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -262,6 +262,25 @@ public class FireBaseService {
 
             }
         });
+    }
+
+    /**
+     * func to delete appointment from DB
+     * @param appointment
+     */
+    public static void deleteAppointment(Appointment appointment){
+        database.getReference().child("Appointment").child(appointment.getKey())
+                .child(getHour(appointment.getStartTime()))
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                snapshot.getRef().removeValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
+
     }
 }
 

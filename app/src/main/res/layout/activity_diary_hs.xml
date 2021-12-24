@@ -215,13 +215,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/returnHS"
-        android:layout_width="200dp"
-        android:layout_height="79dp"
-        android:layout_gravity="center"
-        android:text="home"
-        android:textSize="24sp"
-        android:visibility="visible" />
-
 </LinearLayout>

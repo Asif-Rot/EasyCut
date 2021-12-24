@@ -1,11 +1,14 @@
 package com.example.easycut;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -35,6 +38,12 @@ public class DiaryHairStylistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_hs);
+
+        //back button
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         init_map();
         EditText datapikerHS=(EditText) findViewById(R.id.datePickerHS);
         datapikerHS.setInputType(InputType.TYPE_NULL);
@@ -58,15 +67,6 @@ public class DiaryHairStylistActivity extends AppCompatActivity {
                 picker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 picker.show();
 
-            }
-        });
-
-        Button back = findViewById(R.id.returnHS);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DiaryHairStylistActivity.this, ScreenHairStylistActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -143,5 +143,14 @@ public class DiaryHairStylistActivity extends AppCompatActivity {
     public void showClientTurn(String date){
         DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child(date);
 
+    }
+    //back button
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

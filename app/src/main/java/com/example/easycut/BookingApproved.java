@@ -19,7 +19,7 @@ public class BookingApproved extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_approved);
         details = findViewById(R.id.appointmentDetails);
-        details.setText("Appointment has been scheduled for: " + FireBaseService.appointment.getKey()+ ", "
+        details.setText("Appointment has been scheduled for: " + FireBaseService.appointment.getKey()+ ",at "
                 + FireBaseService.appointment.getStartTime());
         details.setTextSize(18);
 
@@ -32,5 +32,9 @@ public class BookingApproved extends AppCompatActivity  {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

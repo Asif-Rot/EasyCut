@@ -1,12 +1,15 @@
 package com.example.easycut;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.easycut.callInterface.myAppointmentCallback;
 import com.example.easycut.objects.Appointment;
@@ -14,37 +17,44 @@ import com.example.easycut.objects.Appointment;
 import java.util.ArrayList;
 
 public class myAppointmentActivity extends AppCompatActivity {
-    TextView txtMyApp;
-    Button back;
+    RecyclerView recyclerView;
+    private AppointmentAdapter adapter;
     ArrayList<Appointment> myAppointment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_appointment);
-        txtMyApp = (TextView) findViewById(R.id.showMyApp);
-        back = findViewById(R.id.btnBack);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(myAppointmentActivity.this, ScreenUserActivity.class);
-                startActivity(intent);
-            }
-        });
+
+        //back button
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
 
         myAppointment = FireBaseService.getMyAppointments(new myAppointmentCallback() {
             @Override
             public void onCallback(ArrayList<Appointment> arr) {
-                String my_app = "";
-                for(Appointment a : arr){
-                    my_app += "Date: "+a.getDate()+"\t" +"Time: "+ a.getStartTime()+"\n";
-                }
-                txtMyApp.setTextSize(20);
-                txtMyApp.setText(my_app);
+                recyclerView = findViewById(R.id.normal_rec);
+                recyclerView.setLayoutManager(new LinearLayoutManager(myAppointmentActivity.this));
+                myAppointment = new ArrayList<>();
+                adapter = new AppointmentAdapter(myAppointmentActivity.this, arr);
+                recyclerView.setAdapter(adapter);
+                recyclerView.addItemDecoration(new DividerItemDecoration(myAppointmentActivity.this, LinearLayoutManager.VERTICAL));
+
             }
         });
 
-
     }
+
+    //back button
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

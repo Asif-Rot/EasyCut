@@ -1,5 +1,7 @@
 package com.example.easycut;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -14,6 +16,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -47,6 +50,11 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
 
         // Notification manager
         notificationManager = NotificationManagerCompat.from(this);
+
+        //back button
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         //date picker
         eText = (EditText) findViewById(R.id.datePicker);
@@ -150,4 +158,14 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {}
+
+    //back button
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
