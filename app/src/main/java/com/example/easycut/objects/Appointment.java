@@ -1,19 +1,19 @@
 package com.example.easycut.objects;
 
-import com.example.easycut.IAppointment;
+import com.example.easycut.Interface.IAppointment;
 
 import java.util.HashMap;
 
 public class Appointment implements IAppointment {
     private String _key;
-    private int _type;
+    private String _type;
     private String _ClientID;
     private String _startTime;
     private String _endTime;
 
 
 
-    public Appointment(String key,int type, String ClientID,String startTime, String endTime  ){
+    public Appointment(String key,String type, String ClientID,String startTime, String endTime  ){
         _key = key;
         _type = type;
         _ClientID = ClientID;
@@ -34,13 +34,13 @@ public class Appointment implements IAppointment {
     }
 
     @Override
-    public int getType() {
+    public String getType() {
         return _type;
     }
 
     @Override
-    public void setType(int i) {
-        _type = i;
+    public void setType(String i) {
+        this._type = i;
     }
 
     @Override
@@ -49,8 +49,8 @@ public class Appointment implements IAppointment {
     }
 
     @Override
-    public void getClientName(String s) {
-        _ClientID = s;
+    public void setClientID(String s) {
+        this._ClientID = s;
     }
 
     @Override

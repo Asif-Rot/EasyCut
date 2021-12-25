@@ -73,7 +73,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<AppointmentAdapter.
         void setDetails(Appointment appointment){
             txtDate.setText("Date: "+appointment.getDate());
             txtTime.setText("Time: "+appointment.getStartTime());
-            txtType.setText("Type: "+Integer.toString(appointment.getType()));
+            txtType.setText("Type: "+appointment.getType());
         }
     }
 }

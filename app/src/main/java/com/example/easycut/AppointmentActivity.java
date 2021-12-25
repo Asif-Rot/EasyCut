@@ -27,10 +27,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.easycut.callInterface.UserListCallback;
+import com.example.easycut.callInterface.callBackProudct;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Set;
 
 public class AppointmentActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener {
@@ -80,10 +82,17 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
 
         //Spinner for haircuts
         Spinner spinHairCut = (Spinner) findViewById(R.id.spinnerHairType);
-        ArrayAdapter<String> adapterHC = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, haircuts);
-        adapterHC.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinHairCut.setAdapter(adapterHC);
-        spinHairCut.setOnItemSelectedListener(this);
+        FireBaseService.get_set_Product(new callBackProudct() {
+            @Override
+            public void callBackProudct(List<String> list) {
+                ArrayAdapter<String> adapterHC = new ArrayAdapter<String>
+                        (AppointmentActivity.this, android.R.layout.simple_spinner_item, list);
+                adapterHC.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinHairCut.setAdapter(adapterHC);
+                spinHairCut.setOnItemSelectedListener(AppointmentActivity.this);
+            }
+        });
+
 
         //Spinner for times
         Spinner spinTimes = (Spinner) findViewById(R.id.spinnerTime);
@@ -94,7 +103,7 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
             public void onClick(View v) {
                 if (eText.getText().toString().equals(""))
                     Toast.makeText(getApplicationContext(), "Please pick a date first", Toast.LENGTH_SHORT).show();
-                else if (spinHairCut.getSelectedItem().toString().equals(""))
+                else if (spinHairCut.getSelectedItem().toString().equals(" "))
                         Toast.makeText(getApplicationContext(),"Please pick an haircut first", Toast.LENGTH_SHORT).show();
                     else{
                     spinTimes.setEnabled(true);      //to enable
@@ -120,7 +129,7 @@ public class AppointmentActivity extends AppCompatActivity  implements AdapterVi
             @Override
             public void onClick(View v) {
                 if (!spinTimes.getSelectedItem().toString().equals("")) {
-                    FireBaseService.db_makeAppointment(spinTimes, eText);
+                    FireBaseService.db_makeAppointment(spinTimes,spinHairCut, eText);
                     sendOnChannel(v);
                     Intent intent = new Intent(AppointmentActivity.this, BookingApproved.class);
                     startActivity(intent);

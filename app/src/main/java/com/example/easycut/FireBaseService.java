@@ -39,10 +39,10 @@ import java.util.Set;
 
 public class FireBaseService {
     private static Set<String> stringSet = new HashSet<>();
-    private static HashMap<String, Appointment> map_appoint_show = new HashMap<>();
-    private static final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    protected static Appointment appointment = new Appointment(null, 1, user.getUid(), null, null);
-    private static FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private static HashMap<String, Appointment> map_appoint_show=new HashMap<>();
+//    private static final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    protected static Appointment appointment = new Appointment(null,null, null,null, null);
+    private static final FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     //this is how to get to child of a child
     public static void getHours(final UserListCallback myCallback, String date) {
@@ -99,8 +99,8 @@ public class FireBaseService {
                     String key = i.getKey();
                     String startTime = i.child("startTime").getValue().toString();
                     String clientID = i.child("clientID").getValue().toString();
-                    String duration = i.child("duration").getValue().toString();
-                    Appointment a = new Appointment(date, 1, clientID, startTime, "0");
+                    String type = i.child("type").getValue().toString();
+                    Appointment a = new Appointment(date, type, clientID, startTime, "0");
                     map_appoint_show.put(key, a);
                 }
                 myCallback.appointShowCallBack(map_appoint_show);
@@ -138,14 +138,21 @@ public class FireBaseService {
         });
     }
 
-    public static void db_makeAppointment(Spinner spinTimes, EditText eText) {
+    /**
+     * this func write appointment into the DB
+     * @param spinTimes
+     * @param spinHairCut
+     * @param eText
+     */
+    public static void db_makeAppointment(Spinner spinTimes,Spinner spinHairCut, EditText eText) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        appointment.setClientID(user.getUid());
         appointment.setKey(eText.getText().toString());
         appointment.setStartTime(spinTimes.getSelectedItem().toString());
+        appointment.setType(spinHairCut.getSelectedItem().toString());
         DatabaseReference reference = database.getReference("Appointment");
         reference.child(appointment.getKey()).child(getHour(appointment.getStartTime())).setValue(appointment);
-        //ֿreference.child(appointment.getKey()).child(appointment.getStartTime()).setValue(appointment);
         reference.child(appointment.getKey()).orderByKey();
-        System.out.println();
     }
 
     public static String getHour(String hour) {
@@ -242,11 +249,11 @@ public class FireBaseService {
 
     /**
      * func to get all user appointments
-     *
      * @param myCallback
      * @return arraylist with all user appointments
      */
-    public static ArrayList<Appointment> getMyAppointments(final myAppointmentCallback myCallback) {
+    public static ArrayList<Appointment> getMyAppointments(final myAppointmentCallback myCallback){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         ArrayList<Appointment> appointmentList = new ArrayList<>();
         database.getReference().child("Appointment").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -254,7 +261,7 @@ public class FireBaseService {
                 for (DataSnapshot date : snapshot.getChildren()) {
                     for (DataSnapshot appTemp : date.getChildren()) {
                         if (appTemp.child("clientID").getValue().equals(user.getUid())) {
-                            int type = Integer.parseInt(appTemp.child("type").getValue().toString());
+                            String type = appTemp.child("type").getValue().toString();
                             String start = appTemp.child("startTime").getValue().toString();
                             String end = "";
 
