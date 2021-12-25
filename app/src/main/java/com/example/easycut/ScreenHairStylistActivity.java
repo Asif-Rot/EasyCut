@@ -1,11 +1,14 @@
 package com.example.easycut;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -18,6 +21,12 @@ public class ScreenHairStylistActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen_hs);
+
+        //back button
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         Button showDayBook = (Button) findViewById(R.id.show_dayBook);
         showDayBook.setOnClickListener(new View.OnClickListener() {
@@ -48,5 +57,22 @@ public class ScreenHairStylistActivity extends AppCompatActivity {
 
             }
         });
+
+
+    }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(ScreenHairStylistActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
