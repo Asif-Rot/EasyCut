@@ -18,6 +18,7 @@ public class ScreenUserActivity extends AppCompatActivity {
     Button _makeAppointment;
     Button viewAppointment;
     private FirebaseAuth mAuth;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {

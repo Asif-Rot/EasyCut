@@ -57,7 +57,7 @@ public class FireBaseService {
                             Map<String, Object> objectHashMap = snapshot.getValue(objectsGTypeInd);
                             assert objectHashMap != null;
                             ArrayList<Object> objectArrayList = new ArrayList<Object>(objectHashMap.values());
-                            String hour = (String) objectArrayList.get(2);
+                            String hour = (String) objectArrayList.get(3);
                             stringSet.add(hour);
                         }
                         myCallback.onCallback(stringSet);
